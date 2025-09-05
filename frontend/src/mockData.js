@@ -201,9 +201,8 @@ params = {
 response = requests.get(url, headers=headers, params=params)
 data = response.json()
 
-print(f"Retrieved {len(data['records'])} energy futures records")
-for record in data['records'][:5]:  # Show first 5 records
-    print(f"Date: {record['date']}, Price: ${record['price']}")`,
+print("Retrieved energy futures records")
+print("Sample data structure available")`,
           javascript: `// Get Energy Futures JSON Data
 const params = new URLSearchParams({
     start_operating_date: '2024-01-15',
