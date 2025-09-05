@@ -222,7 +222,7 @@ function App() {
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 py-6 overflow-y-auto">
+            <nav className="flex-1 py-6 overflow-y-auto scrollbar-hide">
               <div className="space-y-2">
                 {API_SECTIONS.map((section) => (
                   <NavigationItem
