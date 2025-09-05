@@ -110,7 +110,7 @@ puts "Your API Key: #{data['api_key']}"\`,
           { name: "end_date", type: "date", required: false, description: "End date filter (YYYY-MM-DD)" }
         ],
         examples: {
-          python: `import requests
+          python: \`import requests
 
 # Download Energy Futures Data
 url = "https://api.enerpricedata.com/datasets/download/energy-futures"
@@ -129,15 +129,15 @@ response = requests.get(url, headers=headers, params=params)
 with open("energy_futures.xlsx", "wb") as f:
     f.write(response.content)
     
-print("Energy futures data downloaded successfully!")`,
-          javascript: `// Download Energy Futures Data
+print("Energy futures data downloaded successfully!")\`,
+          javascript: \`// Download Energy Futures Data
 const params = new URLSearchParams({
     start_operating_date: '2024-01-15',
     control_area: 'ERCOT',
     block_types: '7x8,2x16'
 });
 
-const response = await fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params}\`, {
+const response = await fetch(\\\`https://api.enerpricedata.com/datasets/download/energy-futures?\\\${params}\\\`, {
     headers: {
         'X-API-Key': 'YOUR_API_KEY'
     }
@@ -148,8 +148,8 @@ const url = window.URL.createObjectURL(blob);
 const a = document.createElement('a');
 a.href = url;
 a.download = 'energy_futures.xlsx';
-a.click();`,
-          ruby: `require 'net/http'
+a.click();\`,
+          ruby: \`require 'net/http'
 
 uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures')
 params = {
@@ -167,10 +167,10 @@ request['X-API-Key'] = 'YOUR_API_KEY'
 
 response = http.request(request)
 File.write('energy_futures.xlsx', response.body)
-puts 'Energy futures data downloaded!'`,
-          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures?start_operating_date=2024-01-15&control_area=ERCOT&block_types=7x8,2x16" \\
-  -H "X-API-Key: YOUR_API_KEY" \\
-  -o energy_futures.xlsx`
+puts 'Energy futures data downloaded!'\`,
+          curl: \`curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures?start_operating_date=2024-01-15&control_area=ERCOT&block_types=7x8,2x16" \\\\
+  -H "X-API-Key: YOUR_API_KEY" \\\\
+  -o energy_futures.xlsx\`
         }
       },
       {
