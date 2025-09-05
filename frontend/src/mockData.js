@@ -375,7 +375,7 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
   errors: {
     title: "Error Codes",
     description: "Complete reference of API error codes and their meanings.",
-    content: \`
+    content: `
       <div class="space-y-6">
         <div class="overflow-x-auto">
           <table class="w-full border border-gray-200 dark:border-gray-700 rounded-lg">
@@ -396,7 +396,7 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
           </table>
         </div>
       </div>
-    \`
+    `
   },
 
   notebook: {
