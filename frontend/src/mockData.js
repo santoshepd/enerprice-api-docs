@@ -239,10 +239,8 @@ request['X-API-Key'] = 'YOUR_API_KEY'
 response = http.request(request)
 data = JSON.parse(response.body)
 
-puts "Retrieved #{data['records'].length} energy futures records"
-data['records'][0..4].each do |record|
-  puts "Date: #{record['date']}, Price: $#{record['price']}"
-end`,
+puts "Retrieved energy futures records"
+puts "Sample data structure available"`,
           curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures/json?start_operating_date=2024-01-15&control_area=ERCOT&raw=true" \\
   -H "X-API-Key: YOUR_API_KEY"`
         }
