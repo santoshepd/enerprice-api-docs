@@ -217,10 +217,8 @@ const response = await fetch(\`https://api.enerpricedata.com/datasets/download/e
 });
 
 const data = await response.json();
-console.log(\`Retrieved \${data.records.length} energy futures records\`);
-data.records.slice(0, 5).forEach(record => {
-    console.log(\`Date: \${record.date}, Price: $\${record.price}\`);
-});`,
+console.log('Retrieved energy futures records');
+console.log('Sample data structure available');`,
           ruby: `require 'net/http'
 require 'json'
 
