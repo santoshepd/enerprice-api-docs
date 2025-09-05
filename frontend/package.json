@@ -1,7 +1,10 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "enerPrice-api-docs",
+  "version": "1.0.0",
   "private": true,
+  "homepage": "https://yourusername.github.io/enerPrice-api-docs",
+  "description": "EnerPrice API Documentation - A sleek, futuristic API documentation UI",
+  "keywords": ["api", "documentation", "react", "energy", "futures"],
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-accordion": "^1.2.8",
@@ -57,7 +60,16 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test"
+    "test": "craco test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "deploy:netlify": "npm run build && echo 'Build ready for Netlify! Upload the build folder.'",
+    "deploy:vercel": "npm run build && vercel --prod",
+    "deploy:firebase": "npm run build && firebase deploy",
+    "analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+    "serve": "npx serve -s build",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "browserslist": {
     "production": [
@@ -79,6 +91,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.4",
+    "gh-pages": "^6.1.1",
     "globals": "15.15.0",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17"
