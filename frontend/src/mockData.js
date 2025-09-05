@@ -37,7 +37,7 @@ export const mockApiData = {
           { name: "name", type: "string", required: true, description: "Descriptive name for the API key" }
         ],
         examples: {
-          python: `import requests
+          python: \`import requests
 
 # Generate API Key
 url = "https://api.enerpricedata.com/auth/api-key"
@@ -51,8 +51,8 @@ data = {
 
 response = requests.post(url, headers=headers, json=data)
 api_key = response.json()["api_key"]
-print(f"Your API Key: {api_key}")`,
-          javascript: `// Generate API Key
+print(f"Your API Key: {api_key}")\`,
+          javascript: \`// Generate API Key
 const response = await fetch('https://api.enerpricedata.com/auth/api-key', {
     method: 'POST',
     headers: {
@@ -65,8 +65,8 @@ const response = await fetch('https://api.enerpricedata.com/auth/api-key', {
 });
 
 const data = await response.json();
-console.log('Your API Key:', data.api_key);`,
-          ruby: `require 'net/http'
+console.log('Your API Key:', data.api_key);\`,
+          ruby: \`require 'net/http'
 require 'json'
 
 uri = URI('https://api.enerpricedata.com/auth/api-key')
@@ -80,13 +80,13 @@ request.body = { name: 'My Energy Data Key' }.to_json
 
 response = http.request(request)
 data = JSON.parse(response.body)
-puts "Your API Key: #{data['api_key']}"`,
-          curl: `curl -X POST "https://api.enerpricedata.com/auth/api-key" \\
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \\
-  -H "Content-Type: application/json" \\
+puts "Your API Key: #{data['api_key']}"\`,
+          curl: \`curl -X POST "https://api.enerpricedata.com/auth/api-key" \\\\
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \\\\
+  -H "Content-Type: application/json" \\\\
   -d '{
     "name": "My Energy Data Key"
-  }'`
+  }'\`
         }
       }
     ]
