@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/enerPrice-api-docs/static/css/main.891966c1.css",
+    "main.js": "/enerPrice-api-docs/static/js/main.b2f79ec7.js",
+    "static/media/api.png": "/enerPrice-api-docs/static/media/api.62410b7dbc61f82c4f1c.png",
+    "static/media/epdfav.png": "/enerPrice-api-docs/static/media/epdfav.fa98f5e19876a873ea0a.png",
+    "index.html": "/enerPrice-api-docs/index.html",
+    "main.891966c1.css.map": "/enerPrice-api-docs/static/css/main.891966c1.css.map",
+    "main.b2f79ec7.js.map": "/enerPrice-api-docs/static/js/main.b2f79ec7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.891966c1.css",
+    "static/js/main.b2f79ec7.js"
+  ]
+}
