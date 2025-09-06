@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Moon, Sun, Menu, X, Copy, ChevronDown, Book, Key, Zap, Settings, Database, AlertTriangle, FileText, HelpCircle } from 'lucide-react';
+import { Moon, Sun, Menu, X, Copy, ChevronDown, Book, Key, Zap, Settings, Database, Leaf, AlertTriangle, FileText, HelpCircle } from 'lucide-react';
 import { Button } from './components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './components/ui/select';
 import { useToast } from './hooks/use-toast';
 import { Toaster } from './components/ui/toaster';
 import './App.css';
 import { mockApiData } from './mockData';
+import epdfav from './assets/epdfav.png';
+import apiImage from './assets/api.png';
+
 
 const API_SECTIONS = [
   { id: 'home', title: 'Home', icon: Book },
   { id: 'auth', title: 'Authentication', icon: Key },
   { id: 'energy-futures', title: 'Energy Futures', icon: Zap },
   { id: 'ancillary', title: 'Ancillary Uplift', icon: Settings },
-  { id: 'rec-rps', title: 'REC/RPS', icon: Database },
+  { id: 'rec-rps', title: 'REC/RPS', icon: Leaf },
   { id: 'utility-price', title: 'Utility Price', icon: Database },
   { id: 'errors', title: 'Errors', icon: AlertTriangle },
   { id: 'notebook', title: 'Notebook', icon: FileText },
@@ -22,7 +25,7 @@ const API_SECTIONS = [
 
 const CodeEditor = ({ code, language = 'python' }) => {
   const { toast } = useToast();
-  
+
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(code);
@@ -51,7 +54,7 @@ const CodeEditor = ({ code, language = 'python' }) => {
       </div>
       <div className="p-4">
         <pre className="text-sm text-gray-100 dark:text-gray-200 font-mono whitespace-pre-wrap overflow-x-auto">
-          <code>{code}</code>
+          <code>{(code ?? '').replace(/^\s*\n/, '').trimEnd()}</code>
         </pre>
       </div>
     </div>
@@ -163,7 +166,7 @@ const ContentSection = ({ sectionId, data, selectedLanguage }) => {
 };
 
 function App() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [selectedLanguage, setSelectedLanguage] = useState('python');
@@ -202,12 +205,14 @@ function App() {
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
               {!isNavCollapsed && (
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                    <Book className="h-6 w-6 text-white" />
-                  </div>
+                  <img
+                    src={epdfav}
+                    alt="EnerPrice Logo"
+                    className="w-12 h-12 object-contain rounded-lg shrink-0"
+                  />
                   <div>
-                    <h1 className="text-xl font-bold text-gray-900 dark:text-white">EnerPrice</h1>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">API Documentation</p>
+                    {/* <h1 className="text-xl font-bold text-gray-900 dark:text-white">EnerPrice Data</h1> */}
+                    {<p className="text-xs text-gray-500 dark:text-gray-400">API Documentation</p>}
                   </div>
                 </div>
               )}
@@ -255,8 +260,8 @@ function App() {
             <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">API Documentation</h2>
-                  <p className="text-gray-600 dark:text-gray-300">Complete guide to EnerPrice API</p>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">EnerPrice Data Center</h2>
+                  {/* <p className="text-gray-600 dark:text-gray-300">Complete guide to EnerPrice API</p> */}
                 </div>
                 <div className="flex items-center space-x-4">
                   <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>

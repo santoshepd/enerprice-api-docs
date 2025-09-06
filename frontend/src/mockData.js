@@ -1,12 +1,26 @@
+import apiImage from './assets/api.png';
+
+
+
 export const mockApiData = {
   home: {
     title: "EnerPrice API Documentation",
-    description: "Welcome to the comprehensive EnerPrice API documentation. Access energy market data, futures pricing, and utility information through our powerful REST API.",
+    description: "Welcome to the comprehensive EnerPrice API documentation, your gateway to accessing futures energy market data, ancillary and uplift charges, REC credits and portfolio standards, utility pricing data, and detailed rate structures through our powerful FAST API.",
     content: `
       <div class="space-y-6">
         <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
           <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Getting Started</h3>
-          <p class="text-blue-800 dark:text-blue-200">Begin by obtaining your API key through authentication, then explore our comprehensive energy data endpoints.</p>
+          <p class="text-blue-800 dark:text-blue-200">
+          Begin by obtaining your API key through
+          <a
+            href="https://app.enerpricedata.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-100"
+          >
+            app.enerpricedata.com
+          </a>
+        </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -24,74 +38,25 @@ export const mockApiData = {
     `
   },
   
-  auth: {
+auth: {
     title: "Authentication & API Keys",
-    description: "Secure your API access with API key authentication. Each user can maintain one active API key for accessing energy data endpoints.",
-    endpoints: [
-      {
-        method: "POST",
-        url: "/auth/api-key",
-        title: "Generate API Key",
-        description: "Create a new API key for authentication. Requires JWT authentication.",
-        parameters: [
-          { name: "name", type: "string", required: true, description: "Descriptive name for the API key" }
-        ],
-        examples: {
-          python: `import requests
-
-# Generate API Key
-url = "https://api.enerpricedata.com/auth/api-key"
-headers = {
-    "Authorization": "Bearer YOUR_JWT_TOKEN",
-    "Content-Type": "application/json"
-}
-data = {
-    "name": "My Energy Data Key"
-}
-
-response = requests.post(url, headers=headers, json=data)
-api_key = response.json()["api_key"]
-print(f"Your API Key: {api_key}")`,
-          javascript: `// Generate API Key
-const response = await fetch('https://api.enerpricedata.com/auth/api-key', {
-    method: 'POST',
-    headers: {
-        'Authorization': 'Bearer YOUR_JWT_TOKEN',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: 'My Energy Data Key'
-    })
-});
-
-const data = await response.json();
-console.log('Your API Key:', data.api_key);`,
-          ruby: `require 'net/http'
-require 'json'
-
-uri = URI('https://api.enerpricedata.com/auth/api-key')
-http = Net::HTTP.new(uri.host, uri.port)
-http.use_ssl = true
-
-request = Net::HTTP::Post.new(uri)
-request['Authorization'] = 'Bearer YOUR_JWT_TOKEN'
-request['Content-Type'] = 'application/json'
-request.body = { name: 'My Energy Data Key' }.to_json
-
-response = http.request(request)
-data = JSON.parse(response.body)
-puts "Your API Key: #{data['api_key']}"`,
-          curl: `curl -X POST "https://api.enerpricedata.com/auth/api-key" \\
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "name": "My Energy Data Key"
-  }'`
-        }
-      }
-    ]
-  },
-
+    content: `
+    <div class="space-y-6">
+      <p class="text-gray-800 dark:text-gray-300">
+        Secure your API access with API key authentication. Each user can maintain one active API key.
+      </p>
+      <div class="flex justify-center">
+        <img src="${apiImage}" alt="API Key Screenshot" class="w-full max-w-3xl h-auto rounded-md border shadow-md"/>
+      </div>
+      <ol class="list-decimal list-inside text-gray-700 dark:text-gray-200 space-y-2">
+        <li>Login to your account at <a href="https://app.enerpricedata.com" class="text-blue-600 dark:text-blue-400 underline">app.enerpricedata.com</a></li>
+        <li>Click on your profile icon at the top right corner.</li>
+        <li>Click on <strong>Create new API Key</strong>, give it a name, and click <strong>Create</strong>.</li>
+        <li><em>(Optional)</em> Click <strong>Regenerate API Key</strong> if you lost the previous one.</li>
+      </ol>
+    </div>
+  `
+},
   "energy-futures": {
     title: "Energy Futures Data",
     description: "Access comprehensive energy futures pricing data across multiple control areas and block types. Download data in Excel, CSV, or JSON formats.",
@@ -104,7 +69,112 @@ puts "Your API Key: #{data['api_key']}"`,
         parameters: [
           { name: "start_operating_date", type: "date", required: true, description: "Start date for download (YYYY-MM-DD)" },
           { name: "end_operating_date", type: "date", required: false, description: "End date for bulk download (YYYY-MM-DD)" },
-          { name: "control_area", type: "string", required: false, description: "Control area (ERCOT, ISONE, PJM, NYISO, MISO)" },
+          { name: "control_area", type: "string", required: true, description: "Control area (ERCOT, ISONE, PJM, NYISO, MISO)" },
+          { name: "block_types", type: "string", required: false, description: "Block types, comma-separated (7x8,2x16,5x16)" },
+          { name: "start_date", type: "date", required: false, description: "Start date filter (YYYY-MM-DD)" },
+          { name: "end_date", type: "date", required: false, description: "End date filter (YYYY-MM-DD)" }
+        ],
+        examples: {
+          python: `
+import requests
+
+# Download Energy Futures Data
+url = "https://api.enerpricedata.com/datasets/download/energy-futures"
+
+headers = {
+    "X-API-Key": "YOUR_API_KEY"
+}
+
+params = {
+    "start_operating_date": "2024-01-15",
+    "end_operating_date": "2024-01-15",
+    "control_area": "ERCOT",
+    "block_types": "7x8,2x16",
+    "start_date":"",
+    "end_date":"",
+}
+
+response = requests.get(url, headers=headers, params=params)
+
+control_area = params["control_area"]
+end_op_date = params.get("end_operating_date", params["start_operating_date"])
+filename = f"EPD_EnergyFutures_{control_area}_{end_op_date}.xlsx"
+
+
+if response.status_code == 200:
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    print(f"File downloaded successfully and saved as '{filename}'")
+else:
+    # If an error occurs, print status and response text
+    print(f"Error {response.status_code}: {response.text}")
+    
+print("Energy futures data downloaded successfully!")`,
+          javascript: `// Download Energy Futures Data
+const params = new URLSearchParams({
+  start_operating_date: '2024-01-15',
+  end_operating_date: '2024-01-15',
+  control_area: 'ERCOT',
+  block_types: '7x8,2x16',
+  start_date: '',
+  end_date: ''
+});
+
+const controlArea = params.get("control_area");
+const endDate = params.get("end_operating_date") || params.get("start_operating_date");
+const filename = \`EPD_EnergyFutures_\${controlArea}_\${endDate}.xlsx\`;
+
+const response = await fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params}\`, {
+  headers: {
+    'X-API-Key': 'YOUR_API_KEY'
+  }
+});
+
+const blob = await response.blob();
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = filename;
+a.click();`,
+          ruby: `require 'net/http'
+
+uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures')
+params = {
+  start_operating_date: "2024-01-15",
+  end_operating_date: "2024-01-15",
+  control_area: "ERCOT",
+  block_types: "7x8,2x16",
+  start_date: "",
+  end_date: ""
+}
+uri.query = URI.encode_www_form(params)
+
+req = Net::HTTP::Get.new(uri)
+req['X-API-Key'] = 'YOUR_API_KEY'
+
+res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) { |http| http.request(req) }
+
+if res.code.to_i == 200
+  filename = "EPD_EnergyFutures_#{params[:control_area]}_#{params[:end_operating_date]}.xlsx"
+  File.open(filename, 'wb') { |file| file.write(res.body) }
+  puts "File downloaded successfully and saved as '#{filename}'"
+else
+  puts "Error #{res.code}: #{res.body}"
+end`,
+          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures?start_operating_date=2024-01-15&end_operating_date=2024-01-15&control_area=ERCOT&block_types=7x8,2x16&start_date=&end_date=" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  --output "EPD_EnergyFutures_ERCOT_2024-01-15.xlsx"`
+        }
+      },
+      {
+        method: "GET",
+        url: "/datasets/download/energy-futures/csv",
+        title: "Download Energy Futures (CSV)",
+        description: "Download energy futures data in CSV format. Supports single date or date range downloads.",
+        parameters: [
+          { name: "start_operating_date", type: "date", required: true, description: "Start date for download (YYYY-MM-DD)" },
+          { name: "end_operating_date", type: "date", required: false, description: "End date for bulk download (YYYY-MM-DD)" },
+          { name: "control_area", type: "string", required: true, description: "Control area (ERCOT, ISONE, PJM, NYISO, MISO)" },
           { name: "block_types", type: "string", required: false, description: "Block types, comma-separated (7x8,2x16,5x16)" },
           { name: "start_date", type: "date", required: false, description: "Start date filter (YYYY-MM-DD)" },
           { name: "end_date", type: "date", required: false, description: "End date filter (YYYY-MM-DD)" }
@@ -114,63 +184,105 @@ puts "Your API Key: #{data['api_key']}"`,
 
 # Download Energy Futures Data
 url = "https://api.enerpricedata.com/datasets/download/energy-futures"
+
 headers = {
     "X-API-Key": "YOUR_API_KEY"
 }
+
 params = {
     "start_operating_date": "2024-01-15",
+    "end_operating_date": "2024-01-15",
     "control_area": "ERCOT",
-    "block_types": "7x8,2x16"
+    "block_types": "7x8,2x16",
+    "start_date":"",
+    "end_date":"",
 }
 
 response = requests.get(url, headers=headers, params=params)
 
-# Save Excel file
-with open("energy_futures.xlsx", "wb") as f:
-    f.write(response.content)
-    
-print("Energy futures data downloaded successfully!")`,
+control_area = params["control_area"]
+end_op_date = params.get("end_operating_date", params["start_operating_date"])
+filename = f"EPD_EnergyFutures_{control_area}_{end_op_date}.csv"
+
+
+if response.status_code == 200:
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    print(f"File downloaded successfully and saved as '{filename}'")
+else:
+    # status and response text
+    print(f"Error {response.status_code}: {response.text}")`,
           javascript: `// Download Energy Futures Data
 const params = new URLSearchParams({
-    start_operating_date: '2024-01-15',
-    control_area: 'ERCOT',
-    block_types: '7x8,2x16'
+  start_operating_date: "2024-01-15",
+  end_operating_date: "2024-01-15",
+  control_area: "ERCOT",
+  block_types: "7x8,2x16",
+  start_date: "",
+  end_date: ""
 });
 
-const response = await fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params}\`, {
-    headers: {
-        'X-API-Key': 'YOUR_API_KEY'
-    }
-});
+const controlArea = params.get("control_area");
+const endOpDate = params.get("end_operating_date") || params.get("start_operating_date");
+const filename = \`EPD_EnergyFutures_\${controlArea}_\${endOpDate}.csv\`;
 
-const blob = await response.blob();
-const url = window.URL.createObjectURL(blob);
-const a = document.createElement('a');
-a.href = url;
-a.download = 'energy_futures.xlsx';
-a.click();`,
+fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params.toString()}\`, {
+  method: "GET",
+  headers: {
+    "X-API-Key": "YOUR_API_KEY"
+  }
+})
+  .then(response => {
+    if (!response.ok) throw new Error(\`Error \${response.status}: \${response.statusText}\`);
+    return response.blob();
+  })
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    console.log(\`Downloaded: \${filename}\`);
+  })
+  .catch(err => console.error("Download failed:", err));`,
           ruby: `require 'net/http'
 
 uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures')
 params = {
-  start_operating_date: '2024-01-15',
-  control_area: 'ERCOT',
-  block_types: '7x8,2x16'
+  start_operating_date: "2024-01-15",
+  end_operating_date: "2024-01-15",
+  control_area: "ERCOT",
+  block_types: "7x8,2x16",
+  start_date: "",
+  end_date: ""
 }
-uri.query = URI.encode_www_form(params)
 
-http = Net::HTTP.new(uri.host, uri.port)
+url.query = URI.encode_www_form(params)
+http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 
-request = Net::HTTP::Get.new(uri)
-request['X-API-Key'] = 'YOUR_API_KEY'
+request = Net::HTTP::Get.new(url)
+request["X-API-Key"] = "YOUR_API_KEY"
 
 response = http.request(request)
-File.write('energy_futures.xlsx', response.body)
-puts 'Energy futures data downloaded!'`,
-          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures?start_operating_date=2024-01-15&control_area=ERCOT&block_types=7x8,2x16" \\
-  -H "X-API-Key: YOUR_API_KEY" \\
-  -o energy_futures.xlsx`
+
+if response.code == "200"
+  filename = "EPD_EnergyFutures_#{params[:control_area]}_#{params[:end_operating_date]}.csv"
+  File.open(filename, "wb") { |file| file.write(response.body) }
+  puts "File downloaded successfully and saved as '#{filename}'"
+else
+  puts "Error #{response.code}: #{response.body}"
+end`,
+          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -G \
+  --data-urlencode "start_operating_date=2024-01-15" \
+  --data-urlencode "end_operating_date=2024-01-15" \
+  --data-urlencode "control_area=ERCOT" \
+  --data-urlencode "block_types=7x8,2x16" \
+  --data-urlencode "start_date=" \
+  --data-urlencode "end_date=" \
+  -o "EPD_EnergyFutures_ERCOT_2024-01-15.csv"`
         }
       },
       {
@@ -189,20 +301,33 @@ puts 'Energy futures data downloaded!'`,
 
 # Get Energy Futures JSON Data
 url = "https://api.enerpricedata.com/datasets/download/energy-futures/json"
+
 headers = {
     "X-API-Key": "YOUR_API_KEY"
 }
+
 params = {
     "start_operating_date": "2024-01-15",
+    "end_operating_date": "2024-01-15",
     "control_area": "ERCOT",
-    "raw": True
+    "block_types": "7x8,2x16",
+    "start_date":"",
+    "end_date":"",
 }
 
 response = requests.get(url, headers=headers, params=params)
-data = response.json()
+control_area = params["control_area"]
+end_op_date = params.get("end_operating_date", params["start_operating_date"])
+filename = f"EPD_EnergyFutures_{control_area}_{end_op_date}.json"
 
-print("Retrieved energy futures records")
-print("Sample data structure available")`,
+
+if response.status_code == 200:
+    data = response.json()
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+    print(f"File downloaded successfully and saved as '{filename}'")
+else:
+    print(f"Error {response.status_code}: {response.text}")`,
           javascript: `// Get Energy Futures JSON Data
 const params = new URLSearchParams({
     start_operating_date: '2024-01-15',
@@ -222,27 +347,39 @@ console.log('Sample data structure available');`,
           ruby: `require 'net/http'
 require 'json'
 
-uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures/json')
+base_url = "https://api.enerpricedata.com"
+endpoint = "/datasets/download/energy-futures/json"
+
 params = {
-  start_operating_date: '2024-01-15',
-  control_area: 'ERCOT',
-  raw: 'true'
+  start_operating_date: "2025-08-25",
+  end_operating_date: "2025-08-25",
+  control_area: "ERCOT",
+  block_types: "",
+  start_date: "2025-08-01",
+  end_date: "2030-09-01"
 }
+
+uri = URI("#{base_url}#{endpoint}")
 uri.query = URI.encode_www_form(params)
 
-http = Net::HTTP.new(uri.host, uri.port)
-http.use_ssl = true
-
 request = Net::HTTP::Get.new(uri)
-request['X-API-Key'] = 'YOUR_API_KEY'
+request["X-API-Key"] = "YOUR_API_KEY"
 
-response = http.request(request)
-data = JSON.parse(response.body)
+response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+  http.request(request)
+end
 
-puts "Retrieved energy futures records"
-puts "Sample data structure available"`,
-          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures/json?start_operating_date=2024-01-15&control_area=ERCOT&raw=true" \\
-  -H "X-API-Key: YOUR_API_KEY"`
+if response.is_a?(Net::HTTPSuccess)
+  data = JSON.parse(response.body)
+  filename = "EPD_EnergyFutures_ERCOT_2025-08-25.json"
+  File.write(filename, JSON.pretty_generate(data))
+  puts "File downloaded and saved as '#{filename}'"
+else
+  puts "Error #{response.code}: #{response.body}"
+end`,
+          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures/json?start_operating_date=2025-08-25&end_operating_date=2025-08-25&control_area=ERCOT&block_types=&start_date=2025-08-01&end_date=2030-09-01" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -o "EPD_EnergyFutures_ERCOT_2025-08-25.json"`
         }
       }
     ]
@@ -349,16 +486,30 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
         title: "Download Utility Price (Excel)",
         description: "Download utility price data in Excel format.",
         parameters: [
-          { name: "start_operating_date", type: "date", required: true, description: "Operating date for download" }
+          { name: "start_operating_date", type: "date", required: true, description: "Operating date for download" },
+          { name: "end_operating_date", type: "date", required: false, description: "Operating End date for download" }
         ],
         examples: {
           python: `import requests
 
 url = "https://api.enerpricedata.com/datasets/download/utility-price"
+
 headers = {"X-API-Key": "YOUR_API_KEY"}
+
 params = {"start_operating_date": "2024-01-15"}
 
-response = requests.get(url, headers=headers, params=params)`,
+response = requests.get(url, headers=headers, params=params)
+end_op_date = params.get("end_operating_date", params["start_operating_date"])
+filename = f"EPD_UtilityPrice_{end_op_date}.xlsx"
+
+
+if response.status_code == 200:
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    print(f"File downloaded successfully and saved as '{filename}'")
+else:
+    # If an error occurs, print status and response text
+    print(f"Error {response.status_code}: {response.text}")`,
           javascript: `const response = await fetch('https://api.enerpricedata.com/datasets/download/utility-price?start_operating_date=2024-01-15', {
     headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });`,
@@ -369,6 +520,7 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
   -H "X-API-Key: YOUR_API_KEY"`
         }
       }
+    
     ]
   },
 
@@ -400,14 +552,15 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
   },
 
   notebook: {
-    title: "Example Notebook",
-    description: "Interactive Jupyter notebook with comprehensive API usage examples.",
+    title: "Example",
+    description: "Interactive Jupyter notebook with comprehensive API usage examples using Python.",
     content: `
       <div class="space-y-6">
         <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
           <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">Interactive Examples</h3>
-          <p class="text-blue-800 dark:text-blue-200 mb-4">Explore our comprehensive Jupyter notebook with real-world examples and best practices.</p>
-          <a href="https://colab.research.google.com/notebook" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          <p class="text-blue-800 dark:text-blue-200 mb-4">Explore our comprehensive Jupyter notebook with examples and best practices.</p>
+          <a href="https://colab.research.google.com/github/santoshepd/enerprice-api-docs/blob/main/frontend/notebooks/demo.ipynb
+" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
             Open in Google Colab
             <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -420,14 +573,14 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
 
   support: {
     title: "Support & Contact",
-    description: "Get help with API integration, troubleshooting, and technical questions.",
+    description: "Get help with API integration, troubleshooting, and technical queries.",
     content: `
       <div class="space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Technical Support</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">Get help with API integration and technical issues.</p>
-            <a href="mailto:support@enerpricedata.com" class="text-blue-600 dark:text-blue-400 hover:underline">support@enerpricedata.com</a>
+            <a href="mailto:info@enerpricedata.com" class="text-blue-600 dark:text-blue-400 hover:underline">info@enerpricedata.com</a>
           </div>
           
           <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
