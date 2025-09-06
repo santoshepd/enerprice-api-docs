@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# EnerPrice API Documentation
+# EnerPrice Data API Documentation
 
 ## Tech Stack
 
@@ -118,5 +117,3 @@ module.exports = {
   }
 }
 ```
-EnerPrice Data - API Documentation Guide
->>>>>>> 401601471aacad65b4b6f82bb0b8426d4077a1d6
