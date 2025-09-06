@@ -1,36 +1,7 @@
+<<<<<<< HEAD
 # EnerPrice API Documentation
 
-<div align="center">
-
-![EnerPrice API Docs](https://img.shields.io/badge/EnerPrice-API%20Documentation-blue)
-![React](https://img.shields.io/badge/React-19.0-61DAFB?logo=react)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green)
-
-*A sleek, futuristic API documentation UI for energy market data*
-
-[🚀 Live Demo](#) • [📖 Documentation](#documentation) • [🛠️ Setup](#setup) • [🚀 Deploy](#deployment)
-
-</div>
-
-## ✨ Features
-
-- **🎨 Modern UI**: Sleek, futuristic design with dark/light theme support
-- **📱 Responsive**: Works perfectly on desktop, tablet, and mobile
-- **🔧 Interactive**: Live code examples with copy functionality
-- **🌍 Multi-language**: Support for Python, JavaScript, Ruby, and cURL
-- **📋 Comprehensive**: Complete API documentation with examples
-- **⚡ Fast**: Optimized for performance with lazy loading
-- **🎯 Accessible**: Built with accessibility best practices
-
-## 🖼️ Screenshots
-
-<div align="center">
-  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Dark+Theme" alt="Dark Theme" width="45%">
-  <img src="https://via.placeholder.com/800x400/ffffff/1a1a1a?text=Light+Theme" alt="Light Theme" width="45%">
-</div>
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: React 19, TypeScript (optional)
 - **Styling**: Tailwind CSS, Shadcn/ui components
@@ -45,7 +16,7 @@
 - npm or yarn
 - Git
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Clone the Repository
 
@@ -73,7 +44,7 @@ yarn start
 
 Visit `http://localhost:3000` to see the documentation in action!
 
-## 🎨 Customization
+## Customization
 
 ### Update Your API Information
 
@@ -110,103 +81,7 @@ export const mockApiData = {
 };
 ```
 
-## 🚀 Deployment
-
-### Quick Deploy Script
-
-We've included a deployment script for easy deployment:
-
-```bash
-chmod +x deploy.sh
-./deploy.sh
-```
-
-Choose from:
-1. GitHub Pages
-2. Netlify
-3. Vercel
-4. Firebase Hosting
-5. Manual deployment
-
-### Manual Deployment Options
-
-#### GitHub Pages
-
-1. Update `homepage` in `package.json`:
-   ```json
-   {
-     "homepage": "https://yourusername.github.io/your-repo-name"
-   }
-   ```
-
-2. Deploy:
-   ```bash
-   npm run deploy
-   ```
-
-#### Netlify
-
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-
-2. Drag and drop the `build` folder to [Netlify](https://netlify.com)
-
-#### Vercel
-
-1. Install Vercel CLI:
-   ```bash
-   npm install -g vercel
-   ```
-
-2. Deploy:
-   ```bash
-   npm run deploy:vercel
-   ```
-
-#### Firebase Hosting
-
-1. Install Firebase CLI:
-   ```bash
-   npm install -g firebase-tools
-   firebase login
-   firebase init hosting
-   ```
-
-2. Deploy:
-   ```bash
-   npm run deploy:firebase
-   ```
-
-For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md).
-
-## 📁 Project Structure
-
-```
-enerPrice-api-docs/
-├── frontend/
-│   ├── public/
-│   │   ├── index.html
-│   │   └── manifest.json
-│   ├── src/
-│   │   ├── components/
-│   │   │   └── ui/          # Shadcn components
-│   │   ├── hooks/
-│   │   │   └── use-toast.js
-│   │   ├── App.js           # Main application
-│   │   ├── App.css          # Custom styles
-│   │   ├── index.css        # Tailwind imports
-│   │   ├── index.js         # Entry point
-│   │   └── mockData.js      # API documentation data
-│   ├── package.json
-│   └── tailwind.config.js
-├── deploy.sh                # Quick deployment script
-├── DEPLOYMENT_GUIDE.md      # Detailed deployment guide
-└── README.md               # This file
-```
-
-## 🎯 Available Scripts
+## Available Scripts
 
 In the `frontend` directory:
 
@@ -219,7 +94,7 @@ In the `frontend` directory:
 - `npm run analyze` - Analyze bundle size
 - `npm run serve` - Serve production build locally
 
-## 🎨 Theme Customization
+##  Theme Customization
 
 ### Dark/Light Theme
 
@@ -243,78 +118,5 @@ module.exports = {
   }
 }
 ```
-
-## 📱 Mobile Optimization
-
-The UI is fully responsive and includes:
-
-- Collapsible navigation for mobile devices
-- Touch-friendly interactions
-- Optimized typography for small screens
-- Progressive Web App (PWA) ready
-
-## 🔧 Configuration Files
-
-### Environment Variables
-
-Create `.env.production` for production settings:
-
-```env
-REACT_APP_API_BASE_URL=https://your-production-api.com
-REACT_APP_ENVIRONMENT=production
-```
-
-### Netlify Configuration
-
-Create `public/_redirects`:
-
-```
-/*    /index.html   200
-```
-
-### GitHub Pages Configuration
-
-The app includes a custom 404.html for proper client-side routing on GitHub Pages.
-
-## 📊 Performance
-
-- **Lighthouse Score**: 95+ (Performance, Accessibility, Best Practices, SEO)
-- **Bundle Size**: Optimized with code splitting
-- **Loading Speed**: <3s on 3G networks
-- **Core Web Vitals**: Passes all metrics
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit changes: `git commit -am 'Add feature'`
-4. Push to branch: `git push origin feature-name`
-5. Submit a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- 📖 **Documentation**: Check [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
-- 🐛 **Issues**: [GitHub Issues](#)
-- 💬 **Discussions**: [GitHub Discussions](#)
-
-## 🙏 Acknowledgments
-
-- [React](https://reactjs.org/) - UI library
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Shadcn/ui](https://ui.shadcn.com/) - UI components
-- [Lucide](https://lucide.dev/) - Icons
-- [Vercel](https://vercel.com/) - Deployment platform
-
----
-
-<div align="center">
-
-**⭐ Star this repository if you found it helpful!**
-
-Made with ❤️ for the developer community
-
-</div>
+EnerPrice Data - API Documentation Guide
+>>>>>>> 401601471aacad65b4b6f82bb0b8426d4077a1d6
