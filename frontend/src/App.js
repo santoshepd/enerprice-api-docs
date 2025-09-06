@@ -196,7 +196,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/enerprice-api-docs">
       <div className={`min-h-screen ${isDark ? 'dark' : ''}`}>
         <div className="flex h-screen bg-gray-50 dark:bg-black">
           {/* Left Navigation Pane */}
