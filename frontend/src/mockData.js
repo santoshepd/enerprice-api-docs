@@ -213,7 +213,7 @@ end`,
           python: `import requests
 
 # Download Energy Futures Data
-url = "https://api.enerpricedata.com/datasets/download/energy-futures"
+url = "https://api.enerpricedata.com/datasets/download/energy-futures/csv"
 
 headers = {
     "X-API-Key": "YOUR_API_KEY"
@@ -254,7 +254,7 @@ const controlArea = params.get("control_area");
 const endOpDate = params.get("end_operating_date") || params.get("start_operating_date");
 const filename = \`EPD_EnergyFutures_\${controlArea}_\${endOpDate}.csv\`;
 
-fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params.toString()}\`, {
+fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures/csv?\${params.toString()}\`, {
   method: "GET",
   headers: {
     "X-API-Key": "YOUR_API_KEY"
@@ -275,7 +275,7 @@ fetch(\`https://api.enerpricedata.com/datasets/download/energy-futures?\${params
   .catch(err => console.error("Download failed:", err));`,
           ruby: `require 'net/http'
 
-uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures')
+uri = URI('https://api.enerpricedata.com/datasets/download/energy-futures/csv')
 params = {
   start_operating_date: "2024-01-15",
   end_operating_date: "2024-01-15",
@@ -301,7 +301,7 @@ if response.code == "200"
 else
   puts "Error #{response.code}: #{response.body}"
 end`,
-          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures" \
+          curl: `curl -X GET "https://api.enerpricedata.com/datasets/download/energy-futures/csv" \
   -H "X-API-Key: YOUR_API_KEY" \
   -G \
   --data-urlencode "start_operating_date=2024-01-15" \
@@ -965,7 +965,7 @@ request['X-API-Key'] = 'YOUR_API_KEY'`,
         examples: {
           python: `import requests
 
-url = "https://api.enerpricedata.com/datasets/download/utility-price"
+url = "https://api.enerpricedata.com/datasets/download/utility-price/csv"
 
 headers = {"X-API-Key": "YOUR_API_KEY"}
 
